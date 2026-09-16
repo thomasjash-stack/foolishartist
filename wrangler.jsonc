@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bright-estimates",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+
+  // Serves ./public as static files. index.html at /, internal/index.html at /internal
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+
+  // Fill database_id in from `npx wrangler d1 create bright-estimates`
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "bright-estimates",
+      "database_id": "PASTE_DATABASE_ID_HERE"
+    }
+  ],
+
+  "observability": { "enabled": true },
+
+  // Add this once the DNS record exists in the same Cloudflare account
+  "routes": [
+    { "pattern": "estimates.brightlegal.co.uk", "custom_domain": true }
+  ]
+}
